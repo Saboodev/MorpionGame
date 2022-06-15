@@ -4,6 +4,8 @@ const cellules = document.querySelectorAll('.cell');
 let verrouillage = true;
 let joueurEnCours = "X";
 
+const replay = document.querySelector(".button");
+
 info.innerHTML = `Au tour de ${joueurEnCours}`;
 
 const alignementsGagnants = [
@@ -63,6 +65,24 @@ function validationResultats(){
     if(finDePartie){
         info.innerText = `Le joueur ${joueurEnCours} a gagné !`
         verrouillage = false;
+        //Rend visible le bouton rejouer
+        replay.style.visibility = "visible";
+        replay.onclick = function() {
+        location.reload();
+        }
+        // animation confettis
+        const start = () => {
+            setTimeout(function() {
+                confetti.start()
+            }, 1000); // 1000 = 1 seconde pour démarrer les confettis
+        };
+        const stop = () => {
+            setTimeout(function() {
+                confetti.stop()
+            }, 5000); // 5000 = 5 secondes pour stopper les confettis
+        };
+        start();
+        stop();
         return;
     }
 
@@ -71,6 +91,11 @@ function validationResultats(){
     if(matchNul){
         info.innerText =  'Partie terminée, match nul !';
         verrouillage = false;
+        //Rend visible le bouton rejouer
+        replay.style.visibility = "visible";
+        replay.onclick = function() {
+        location.reload();
+        }
         return;
     }
 
