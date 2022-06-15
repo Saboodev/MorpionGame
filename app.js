@@ -1,7 +1,7 @@
 const info = document.querySelector('.info');
 const cellules = document.querySelectorAll('.cell');
 
-let verouillage = true;
+let verrouillage = true;
 let joueurEnCours = "X";
 
 info.innerHTML = `Au tour de ${joueurEnCours}`;
@@ -27,7 +27,7 @@ function clicSurCase(e){
     const caseClique = e.target;
     const caseIndex = caseClique.getAttribute('data-index');
 
-    if(partieEnCours[caseIndex] !== "" || !verouillage){
+    if(partieEnCours[caseIndex] !== "" || !verrouillage){
         return;
     }
 
@@ -62,21 +62,20 @@ function validationResultats(){
 
     if(finDePartie){
         info.innerText = `Le joueur ${joueurEnCours} a gagné !`
-        verouillage = false;
+        verrouillage = false;
         return;
     }
 
     // si il n'y pas de chaine de caracteres vides dans partie en cours
     let matchNul = !partieEnCours.includes('');
     if(matchNul){
-        info.innerText =  'Match nul !';
-        verouillage = false;
+        info.innerText =  'Partie terminée, match nul !';
+        verrouillage = false;
         return;
     }
 
     changementDeJoueur();
 }
-
 
 
 function changementDeJoueur(){
